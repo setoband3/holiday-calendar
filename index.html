@@ -6,7 +6,7 @@
     <title>会社休日カレンダー</title>
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --holiday: #e63946; --today: #457b9d; --text: #1d3557; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         .calendar-card { background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); width: 100%; max-width: 380px; padding: 20px; box-sizing: border-box; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .month-label { font-size: 1.4em; font-weight: bold; }
@@ -36,20 +36,28 @@
     </div>
 
     <div class="period-info">
-        対象期間: 2025年6月21日 〜 2026年6月20日 [cite: 2]
+        対象期間: 2025年6月21日 〜 2026年6月20日<br>
+        (PDFの黄色い塗りつぶし箇所を反映済)
     </div>
 
     <script>
-        // --- 休日リスト（ここにPDFから読み取った日付を並べています） ---
+        // --- PDFから読み取った休日（黄色い塗りつぶし） ---
         const holidays = [
-            // 2025年（土日・祝日等）
-            "2025-06-21", "2025-06-22", "2025-06-28", "2025-06-29",
-            "2025-07-05", "2025-07-06", "2025-07-12", "2025-07-13", "2025-07-19", "2025-07-20", "2025-07-26", "2025-07-27",
-            "2025-08-02", "2025-08-03", "2025-08-09", "2025-08-10", "2025-08-11", "2025-08-16", "2025-08-17",
-            "2025-12-29", "2025-12-30", "2025-12-31",
+            // 2025年
+            "2025-06-22", "2025-06-29",
+            "2025-07-06", "2025-07-13", "2025-07-20", "2025-07-21", "2025-07-27",
+            "2025-08-03", "2025-08-10", "2025-08-11", "2025-08-13", "2025-08-14", "2025-08-15", "2025-08-17", "2025-08-24", "2025-08-31",
+            "2025-09-07", "2025-09-14", "2025-09-15", "2025-09-21", "2025-09-23", "2025-09-28",
+            "2025-10-05", "2025-10-12", "2025-10-13", "2025-10-19", "2025-10-26",
+            "2025-11-02", "2025-11-03", "2025-11-09", "2025-11-16", "2025-11-23", "2025-11-24", "2025-11-30",
+            "2025-12-07", "2025-12-14", "2025-12-21", "2025-12-28", "2025-12-30", "2025-12-31",
             // 2026年
-            "2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04"
-            // ※PDFの表形式に基づき、代表的な休日を抜粋しています。
+            "2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-11", "2026-01-12", "2026-01-18", "2026-01-25",
+            "2026-02-01", "2026-02-08", "2026-02-11", "2026-02-15", "2026-02-22", "2026-02-23",
+            "2026-03-01", "2026-03-08", "2026-03-15", "2026-03-20", "2026-03-22", "2026-03-29",
+            "2026-04-05", "2026-04-12", "2026-04-19", "2026-04-26", "2026-04-29",
+            "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-10", "2026-05-17", "2026-05-24", "2026-05-31",
+            "2026-06-07", "2026-06-14"
         ];
 
         let viewDate = new Date();
@@ -58,14 +66,12 @@
             const y = viewDate.getFullYear();
             const m = viewDate.getMonth();
             document.getElementById("monthDisplay").innerText = `${y}年 ${m + 1}月`;
-            
             const first = new Date(y, m, 1).getDay();
             const last = new Date(y, m + 1, 0).getDate();
             const body = document.getElementById("calendarBody");
             body.innerHTML = "";
-            
             let date = 1;
-            const todayStr = new Date().toISOString().split('T')[0];
+            const todayStr = new Date().toLocaleDateString('sv-SE');
 
             for (let i = 0; i < 6; i++) {
                 let row = document.createElement("tr");
