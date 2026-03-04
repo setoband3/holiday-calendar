@@ -7,6 +7,10 @@
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --holiday: #e63946; --today: #457b9d; --text: #1d3557; }
         body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        
+        /* 上部のタイトル設定 */
+        .title-header { font-size: 1.8em; font-weight: bold; margin-bottom: 20px; color: var(--holiday); letter-spacing: 2px; }
+        
         .calendar-card { background: var(--card); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.08); width: 100%; max-width: 380px; padding: 20px; box-sizing: border-box; }
         .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .month-label { font-size: 1.4em; font-weight: bold; }
@@ -16,10 +20,14 @@
         td { text-align: center; padding: 12px 0; font-weight: 500; position: relative; width: 14.28%; }
         .holiday { background: var(--holiday); color: white; border-radius: 50%; }
         .today { border: 2px solid var(--today); border-radius: 50%; color: var(--today); }
-        .period-info { margin-top: 20px; font-size: 0.8em; color: #666; text-align: center; }
+        
+        /* 下部の注釈設定 */
+        .period-info { margin-top: 25px; font-size: 1em; color: #333; font-weight: bold; background: #fff; padding: 10px 20px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
+
+    <div class="title-header">会社休日</div>
 
     <div class="calendar-card">
         <div class="header">
@@ -36,20 +44,16 @@
     </div>
 
     <div class="period-info">
-        ※画像で指定された休日を反映済み
+        2026年6月20日まで記載
     </div>
 
     <script>
-        // --- 送っていただいた画像から抽出した休日リスト ---
+        // 画像から抽出した休日データ（3月〜6月20日まで）
         const holidays = [
-            // 2026年 3月
             "2026-03-01", "2026-03-07", "2026-03-08", "2026-03-15", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-29",
-            // 2026年 4月
             "2026-04-04", "2026-04-05", "2026-04-11", "2026-04-12", "2026-04-19", "2026-04-25", "2026-04-26", "2026-04-29",
-            // 2026年 5月
             "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-10", "2026-05-17", "2026-05-24", "2026-05-30", "2026-05-31",
-            // 2026年 6月
-            "2026-06-06", "2026-06-07", "2026-06-13", "2026-06-14"
+            "2026-06-06", "2026-06-07", "2026-06-13", "2026-06-14", "2026-06-20"
         ];
 
         let viewDate = new Date();
